@@ -29,23 +29,39 @@ class Image extends Model {
             abort( 500, 'The file you tried to upload is not of type image/*' );
         }
 
+        $image = new static();
+        $image->uploadImage( $file );
+        return $image;
+
+    }
+
+    /**
+     * Upload image to image element
+     *
+     * @return static
+     */
+    public function uploadImage( UploadedFile $file )
+    {
         $path = $file->store( config( 'laravelimage.folder' ) );
 
+        if ( ! $path ) {
+            abort( 500, 'Cannot upload image' );
+        }
+
         list( $width, $height) = getimagesize( $file );
-        $image = new static();
 
-        $image->path = $path;
+        $this->path = $path;
 
-        $image->original_name = $file->getClientOriginalName();
-        $image->extension = $file->getClientOriginalExtension();
-        $image->mime_type = $file->getMimeType();
-        $image->size = $file->getClientSize();
-        $image->width = $width;
-        $image->height = $height;
+        $this->original_name = $file->getClientOriginalName();
+        $this->extension = $file->getClientOriginalExtension();
+        $this->mime_type = $file->getMimeType();
+        $this->size = $file->getClientSize();
+        $this->width = $width;
+        $this->height = $height;
 
-        $image->save();
+        $this->save();
 
-        return $image;
+        return $this;
     }
 
     /**

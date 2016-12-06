@@ -80,7 +80,11 @@ class ImageTest extends TestCase
     public function can_update_image_content_of_existing_image() {
         $image = Image::upload( $this->file );
 
-        // $image->replaceImage( $ )
+        $updatedFile = $this->setupUploadFile( 'kitten2.jpg', '.jpg', 'image/jpeg' );
+
+        $image->uploadImage( $updatedFile );
+
+        $this->assertEquals( 'kitten2.jpg', $image->original_name );
     }
     // Is keeping owner when updating
     // Owner is referencing to id of class set in config
