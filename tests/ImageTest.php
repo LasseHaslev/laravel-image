@@ -25,36 +25,21 @@ class ImageTest extends TestCase
     {
         parent::setUp();
 
-        $this->file = $this->setupTestImage();
-        $this->textFile = $this->setupTestTextFile();
+        $this->file = $this->setupUploadFile( 'kitten.jpg', '.jpg', 'image/jpeg' );
+        $this->textFile = $this->setupUploadFile( 'text.txt', '.txt', 'text/plain' );
     }
 
-    protected function setupTestImage()
+    protected function setupUploadFile( $originalName, $extension, $mime_type )
     {
-        $stub = __DIR__ . '/_files/kitten.jpg';
-        $originalName = 'kitten.jpg';
-        $name = str_random(8) . '.jpg';
+        $stub = __DIR__ . '/_files/' . $originalName;
+        $name = str_random(8) . $extension;
         $path = sys_get_temp_dir() . '/'  . $name;
-        $type = 'image/jpeg';
+        $type = $mime_type;
 
         copy( $stub, $path );
 
         return new Illuminate\Http\UploadedFile($path, $originalName, $type, filesize($path), null, true);
     }
-    protected function setupTestTextFile()
-    {
-        $stub = __DIR__ . '/_files/text.txt';
-        $originalName = 'text.txt';
-        $name = str_random(8) . '.txt';
-        $path = sys_get_temp_dir() . '/'  . $name;
-        $type = 'text/plain';
-
-        copy( $stub, $path );
-
-        return new Illuminate\Http\UploadedFile($path, $originalName, $type, filesize($path), null, true);
-    }
-
-
 
     /** @test */
     public function is_returning_an_instance_when_calling_upload_function() {
@@ -91,6 +76,12 @@ class ImageTest extends TestCase
         $this->assertEquals( 'images', config( 'laravelimage.folder' ) );
     }
     // Can update image content $image->updateImage();
+    /** @test */
+    public function can_update_image_content_of_existing_image() {
+        $image = Image::upload( $this->file );
+
+        // $image->replaceImage( $ )
+    }
     // Is keeping owner when updating
     // Owner is referencing to id of class set in config
     // cannot access owner if config owner is set to null
