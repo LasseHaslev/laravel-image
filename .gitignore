@@ -3,4 +3,4 @@ vendor/
 tags
 node_modules/
 composer.lock
-testimages/
+tests/_files/

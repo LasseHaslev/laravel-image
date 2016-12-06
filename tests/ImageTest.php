@@ -6,6 +6,26 @@
  */
 class ImageTest extends TestCase
 {
+    /**
+     * Setup data for each test
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+        $_FILES = array(
+            'image'    =>  array(
+                'name'      =>  'kitten.jpg',
+                'tmp_name'  =>  __DIR__ . '/_files/kitten.jpg',
+                'type'      =>  'image/jpeg',
+                'size'      =>  499,
+                'error'     =>  0
+            )
+        );
+
+    }
+
     // Can upload file Image::upload($filename, $parent);
     // Can set what folder to store to
     // Can set owner when uploading

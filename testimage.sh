@@ -1,3 +1,3 @@
 #!/usr/sh
-mkdir testimages
-wget https://placekitten.com/g/300/300 kitten.jpg -O testimages/kitten.jpg
+mkdir tests/_files
+wget https://placekitten.com/g/300/300 -O tests/_files/kitten.jpg
