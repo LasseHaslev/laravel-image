@@ -127,4 +127,9 @@ class ImageTest extends TestCase
     // }
     //
     // Get readable size 3mb etc.
+    /** @test */
+    public function get_readable_size_of_image() {
+        $image = Image::upload( $this->file );
+        $this->assertEquals( '6.90kB', $image->readableSize() );
+    }
 }

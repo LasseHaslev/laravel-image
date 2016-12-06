@@ -95,6 +95,18 @@ class Image extends Model {
     }
 
 
+    /**
+     * Get readable size of size
+     *
+     * @return string
+     */
+    public function readableSize( int $decimals = 2 )
+    {
+        $size = array('B','kB','MB','GB','TB','PB','EB','ZB','YB');
+        $factor = floor((strlen($this->size) - 1) / 3);
+        return sprintf("%.{$decimals}f", $this->size / pow(1024, $factor)) . @$size[$factor];
+    }
+
 
 
 }
