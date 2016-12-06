@@ -29,7 +29,7 @@ class Image extends Model {
             abort( 500, 'The file you tried to upload is not of type image/*' );
         }
 
-        $path = $file->store( 'images' );
+        $path = $file->store( config( 'laravelimage.folder' ) );
 
         list( $width, $height) = getimagesize( $file );
         $image = new static();

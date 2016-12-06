@@ -86,6 +86,10 @@ class ImageTest extends TestCase
     }
     // Can set owner
     // Can set what folder to store to
+    /** @test */
+    public function has_config_for_where_to_store_images() {
+        $this->assertEquals( 'images', config( 'laravelimage.folder' ) );
+    }
     // Can update image content $image->updateImage();
     // Is keeping owner when updating
     // Owner is referencing to id of class set in config
