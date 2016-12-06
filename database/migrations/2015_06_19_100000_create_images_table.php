@@ -16,16 +16,16 @@ class CreateImagesTable extends Migration {
       Schema::create('images', function($table) {
         $table->increments('id');
 
-        $table->string('name')->default('');
-        $table->string('alt')->deafult( '' );
+        $table->string('original_name')->default('');
+        $table->string('alt')->default( '' );
         $table->string('path')->default('')->unique();
 
-        $table->string('extension')->deafult( '' );
-        $table->integer('size')->deafult( 0 );
-        $table->string('mime_type')->deafult( '' );
+        $table->string('extension')->default( '' );
+        $table->integer('size')->default( 0 );
+        $table->string('mime_type')->default( '' );
 
-        $table->integer('width')->deafult( 0 );
-        $table->integer('height')->deafult( 0 );
+        $table->integer('width')->default( 0 );
+        $table->integer('height')->default( 0 );
 
         $table->integer('owner_id')
             ->unsigned()

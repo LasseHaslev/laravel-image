@@ -1,15 +1,19 @@
 <?php
 
+use LasseHaslev\LaravelImage\Image;
+
 /**
  * Class ImageTest
  * @author Lasse S. Haslev
  */
 class ImageTest extends TestCase
 {
+
     /**
      * @var mixed
      */
     protected $file;
+    protected $textFile;
 
     /**
      * Setup data for each test
@@ -20,13 +24,10 @@ class ImageTest extends TestCase
     {
         parent::setUp();
 
-        $this->setupTestImage();
+        $this->file = $this->setupTestImage();
+        $this->textFile = $this->setupTestTextFile();
     }
-    /**
-     * undocumented function
-     *
-     * @return void
-     */
+
     protected function setupTestImage()
     {
         $stub = __DIR__ . '/_files/kitten.jpg';
@@ -37,24 +38,53 @@ class ImageTest extends TestCase
 
         copy( $stub, $path );
 
-        $this->file = new Illuminate\Http\UploadedFile($path, $originalName, $type, filesize($path), null, true);
+        return new Illuminate\Http\UploadedFile($path, $originalName, $type, filesize($path), null, true);
     }
+    protected function setupTestTextFile()
+    {
+        $stub = __DIR__ . '/_files/text.txt';
+        $originalName = 'text.txt';
+        $name = str_random(8) . '.txt';
+        $path = sys_get_temp_dir() . '/'  . $name;
+        $type = 'image/jpeg';
+
+        copy( $stub, $path );
+
+        return new Illuminate\Http\UploadedFile($path, $originalName, $type, filesize($path), null, true);
+    }
+
 
 
     /** @test */
+    public function is_returning_an_instance_when_calling_upload_function() {
+        $image = Image::upload( $this->file );
+        $this->assertInstanceOf( Image::class, $image );
+    }
+    /** @test */
+    public function is_setting_properties_when_calling_upload_function() {
+        $image = Image::upload( $this->file );
+        // dd( $image );
+        $this->assertEquals( 'kitten.jpg', $image->original_name );
+        $this->assertEquals( 'image/jpeg', $image->mime_type );
+        $this->assertTrue( (bool) $image->size );
+        $this->assertEquals( 300, $image->width );
+        $this->assertEquals( 200, $image->height );
+    }
+    /** @test */
     public function can_upload_new_image() {
-        // dd( $this->file );
+        $image = Image::upload( $this->file );
+        $this->assertTrue( isset( $image->path ) );
+        // $this->assertFileExists( $image->path() );
     }
 
-    // Can upload file Image::upload($filename, $parent);
     // Must be of type image
+    /** @test */
+    // public function uploaded_file_must_be_of_type_image() {
+        // $this->expectedExceptionClass();
+        // $image = Image::upload( $this->file );
+    // }
+    // Can set owner
     // Can set what folder to store to
-    // Can set owner when uploading
-    // Is setting image info when uploading
-        // name
-        // size
-        // width
-        // type
     // Can update image content $image->updateImage();
     // Is keeping owner when updating
     // Owner is referencing to id of class set in config
