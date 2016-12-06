@@ -1,6 +1,7 @@
 <?php
 
 use LasseHaslev\LaravelImage\Image;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Class ImageTest
@@ -46,7 +47,7 @@ class ImageTest extends TestCase
         $originalName = 'text.txt';
         $name = str_random(8) . '.txt';
         $path = sys_get_temp_dir() . '/'  . $name;
-        $type = 'image/jpeg';
+        $type = 'text/plain';
 
         copy( $stub, $path );
 
@@ -79,10 +80,10 @@ class ImageTest extends TestCase
 
     // Must be of type image
     /** @test */
-    // public function uploaded_file_must_be_of_type_image() {
-        // $this->expectedExceptionClass();
-        // $image = Image::upload( $this->file );
-    // }
+    public function uploaded_file_must_be_of_type_image() {
+        $this->expectException( HttpException::class );
+        $image = Image::upload( $this->textFile );
+    }
     // Can set owner
     // Can set what folder to store to
     // Can update image content $image->updateImage();

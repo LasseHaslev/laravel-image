@@ -25,6 +25,10 @@ class Image extends Model {
     public static function upload( UploadedFile $file )
     {
 
+        if ( strpos( $file->getClientMimeType(), 'image' ) === false ) {
+            abort( 500, 'The file you tried to upload is not of type image/*' );
+        }
+
         $path = $file->store( 'images' );
 
         list( $width, $height) = getimagesize( $file );
