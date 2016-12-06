@@ -45,6 +45,8 @@ class ImageTest extends TestCase
     public function is_returning_an_instance_when_calling_upload_function() {
         $image = Image::upload( $this->file );
         $this->assertInstanceOf( Image::class, $image );
+
+        $this->assertEquals( 1, Image::count() );
     }
     /** @test */
     public function is_setting_properties_when_calling_upload_function() {
@@ -105,6 +107,14 @@ class ImageTest extends TestCase
     // Can set owner
     // Can remove owner
     // Can delete image
+    /** @test */
+    public function can_delete_image() {
+        $image = Image::upload( $this->file );
+
+        $image->delete();
+
+        $this->assertEquals( 0, Image::count() );
+    }
     // Can get relative path of image
     // Can get path of image
     // Can get full path of image
