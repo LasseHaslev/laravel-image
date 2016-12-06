@@ -106,7 +106,6 @@ class ImageTest extends TestCase
     // cannot access owner if config owner is set to null
     // Can set owner
     // Can remove owner
-    // Can delete image
     /** @test */
     public function can_delete_image() {
         $image = Image::upload( $this->file );
@@ -115,9 +114,12 @@ class ImageTest extends TestCase
 
         $this->assertEquals( 0, Image::count() );
     }
-    // Can get relative path of image
-    // Can get path of image
-    // Can get full path of image
 
     // Can download original image
+    // This function need to be tested if work. this is not right in storage folder
+    /** @test */
+    // public function can_download_original_image() {
+        // $image = Image::upload( $this->file );
+        // $download = $image->download();
+    // }
 }

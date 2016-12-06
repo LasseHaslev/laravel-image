@@ -84,6 +84,17 @@ class Image extends Model {
         return url( $this->path );
     }
 
+    /**
+     * Download file
+     *
+     * @return response
+     */
+    public function download()
+    {
+        return response()->download( $this->path() );
+    }
+
+
 
 
 }
