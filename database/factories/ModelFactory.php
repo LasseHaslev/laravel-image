@@ -13,3 +13,10 @@
 */
 
 
+$factory->define( Image::class, function (Faker\Generator $faker)
+{
+    return [
+        'name'=>$faker->name,
+        'alt'=>$faker->sentence,
+    ];
+} );

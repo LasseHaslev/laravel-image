@@ -65,4 +65,6 @@ class ImageTest extends TestCase
     // Can get relative path of image
     // Can get path of image
     // Can get full path of image
+
+    // Can download original image
 }
