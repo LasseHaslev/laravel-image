@@ -86,6 +86,19 @@ class ImageTest extends TestCase
 
         $this->assertEquals( 'kitten2.jpg', $image->original_name );
     }
+
+    /** @test */
+    public function can_get_url_of_image_element() {
+        $image = Image::upload( $this->file );
+        $this->assertTrue( (bool) filter_var($image->url(), FILTER_VALIDATE_URL) );
+        $this->assertEquals( url( $image->path ), $image->url() );
+    }
+
+    /** @test */
+    public function can_get_full_path_of_image_element() {
+        $image = Image::upload( $this->file );
+        $this->assertEquals( storage_path( $image->path ), $image->path() );
+    }
     // Is keeping owner when updating
     // Owner is referencing to id of class set in config
     // cannot access owner if config owner is set to null

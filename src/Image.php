@@ -71,8 +71,19 @@ class Image extends Model {
      */
     public function path()
     {
-        return $this->path();
+        return storage_path( $this->path );
     }
+
+    /**
+     * Get the url
+     *
+     * @return string
+     */
+    public function url()
+    {
+        return url( $this->path );
+    }
+
 
 
 }
