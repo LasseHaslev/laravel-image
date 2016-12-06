@@ -115,6 +115,9 @@ class ImageTest extends TestCase
         $this->assertEquals( 0, Image::count() );
     }
 
+    // Is removing images when deleting
+    // Is removeing images when an image is updated
+
     // Can download original image
     // This function need to be tested if work. this is not right in storage folder
     /** @test */
