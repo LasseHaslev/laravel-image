@@ -7,6 +7,11 @@
 class ImageTest extends TestCase
 {
     /**
+     * @var mixed
+     */
+    protected $file;
+
+    /**
      * Setup data for each test
      *
      * @return void
@@ -14,19 +19,35 @@ class ImageTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $_FILES = array(
-            'image'    =>  array(
-                'name'      =>  'kitten.jpg',
-                'tmp_name'  =>  __DIR__ . '/_files/kitten.jpg',
-                'type'      =>  'image/jpeg',
-                'size'      =>  499,
-                'error'     =>  0
-            )
-        );
 
+        $this->setupTestImage();
+    }
+    /**
+     * undocumented function
+     *
+     * @return void
+     */
+    protected function setupTestImage()
+    {
+        $stub = __DIR__ . '/_files/kitten.jpg';
+        $originalName = 'kitten.jpg';
+        $name = str_random(8) . '.jpg';
+        $path = sys_get_temp_dir() . '/'  . $name;
+        $type = 'image/jpeg';
+
+        copy( $stub, $path );
+
+        $this->file = new Illuminate\Http\UploadedFile($path, $originalName, $type, filesize($path), null, true);
+    }
+
+
+    /** @test */
+    public function can_upload_new_image() {
+        // dd( $this->file );
     }
 
     // Can upload file Image::upload($filename, $parent);
+    // Must be of type image
     // Can set what folder to store to
     // Can set owner when uploading
     // Is setting image info when uploading
