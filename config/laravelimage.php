@@ -1,5 +1,5 @@
 <?php
 return [
     'owner'=>'App\User',
-    'folder'=>'images',
+    'folder'=>'uploads/images',
 ];

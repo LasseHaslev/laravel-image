@@ -75,7 +75,7 @@ class ImageTest extends TestCase
     // Can set what folder to store to
     /** @test */
     public function has_config_for_where_to_store_images() {
-        $this->assertEquals( 'images', config( 'laravelimage.folder' ) );
+        $this->assertEquals( 'uploads/images', config( 'laravelimage.folder' ) );
     }
     // Can update image content $image->updateImage();
     /** @test */
@@ -93,13 +93,13 @@ class ImageTest extends TestCase
     public function can_get_url_of_image_element() {
         $image = Image::upload( $this->file );
         $this->assertTrue( (bool) filter_var($image->url(), FILTER_VALIDATE_URL) );
-        $this->assertEquals( url( $image->path ), $image->url() );
+        $this->assertEquals( url( 'storage/' . $image->path ), $image->url() );
     }
 
     /** @test */
     public function can_get_full_path_of_image_element() {
         $image = Image::upload( $this->file );
-        $this->assertEquals( storage_path( $image->path ), $image->path() );
+        $this->assertEquals( storage_path( 'app/public/' . $image->path ), $image->path() );
     }
     // Is keeping owner when updating
     // Owner is referencing to id of class set in config

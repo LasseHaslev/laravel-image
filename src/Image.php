@@ -71,7 +71,7 @@ class Image extends Model {
      */
     public function path()
     {
-        return storage_path( $this->path );
+        return storage_path( 'app/public/' . $this->path );
     }
 
     /**
@@ -81,6 +81,7 @@ class Image extends Model {
      */
     public function url()
     {
+        return asset( 'storage/' . $this->path );
         return url( $this->path );
     }
 
