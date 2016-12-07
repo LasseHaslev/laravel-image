@@ -115,6 +115,9 @@ class ImageTest extends TestCase
         $this->assertEquals( 0, Image::count() );
     }
 
+    // Have config to check if we should soft delete
+    // If false delete and remove image
+
     // Is removing images when deleting
     // Is removeing images when an image is updated
 
