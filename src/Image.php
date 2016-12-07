@@ -42,7 +42,7 @@ class Image extends Model {
      */
     public function uploadImage( UploadedFile $file )
     {
-        $path = $file->store( config( 'laravelimage.folder' ) );
+        $path = $file->store( config( 'laravelimage.folder' ), 'public' );
 
         if ( ! $path ) {
             abort( 500, 'Cannot upload image' );

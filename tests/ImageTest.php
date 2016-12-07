@@ -62,7 +62,7 @@ class ImageTest extends TestCase
     public function can_upload_new_image() {
         $image = Image::upload( $this->file );
         $this->assertTrue( isset( $image->path ) );
-        // $this->assertFileExists( $image->path() );
+        $this->assertFileExists( $image->path() );
     }
 
     // Must be of type image
