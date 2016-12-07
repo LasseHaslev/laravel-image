@@ -125,6 +125,7 @@ class ImageTest extends TestCase
         // $image = Image::upload( $this->file );
         // $download = $image->download();
     // }
+    // Can is using original name when downloading file
     //
     // Get readable size 3mb etc.
     /** @test */

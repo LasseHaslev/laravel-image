@@ -91,7 +91,7 @@ class Image extends Model {
      */
     public function download()
     {
-        return response()->download( $this->path() );
+        return response()->download( $this->path(), $this->original_name );
     }
 
 
