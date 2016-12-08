@@ -25,6 +25,19 @@ return [
 ];
 ```
 
+Its recomended that you overwrite ```images::index``` view.
+To do this add the following to ```resources/views/vendor/images/index.blade.php```
+```php
+@extends( 'backend' )
+
+@section( 'content' )
+
+@include( 'images::elements.Upload' )
+@include( 'images::elements.List' )
+
+@endsection
+```
+You can also do the same for ```images::elements.Upload``` and ```images::elements.List```.
 
 #### Api
 ```php
