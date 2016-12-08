@@ -14,7 +14,7 @@ use LasseHaslev\LaravelImage\Http\Controllers\ImagesController;
 // use LasseHaslev\LaravelImage\Http\Controllers\ImagesController;
 
 Route::group( [ 'prefix'=>config( 'laravelimage.routes' ) ], function () {
-    Route::get( 'ImagesControllerimages', sprintf( '%s@index', ImagesController::class ) )->name( 'images.index' );
+    Route::get( 'images', sprintf( '%s@index', ImagesController::class ) )->name( 'images.index' );
     Route::post( 'images/store', sprintf( '%s@store', ImagesController::class ) )->name( 'images.store' );
     Route::put( 'images/{image}', sprintf( '%s@update', ImagesController::class ) )->name( 'images.update' );
     Route::delete( 'images/{image}', sprintf( '%s@destroy', ImagesController::class ) )->name( 'images.destroy' );
