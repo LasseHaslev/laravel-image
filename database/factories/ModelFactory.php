@@ -1,5 +1,7 @@
 <?php
 
+use LasseHaslev\LaravelImage\Image;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -16,7 +18,13 @@
 $factory->define( Image::class, function (Faker\Generator $faker)
 {
     return [
-        'name'=>$faker->name,
+        'original_name'=>$faker->name,
         'alt'=>$faker->sentence,
+        'path'=>str_random( 30 ),
+        'extension'=>'jpg',
+        'mime_type'=>'image/jpeg',
+        'size'=>$faker->numberBetween( 500,3000 ),
+        'width'=>$faker->numberBetween( 500,3000 ),
+        'height'=>$faker->numberBetween( 500,3000 ),
     ];
 } );
