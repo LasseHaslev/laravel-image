@@ -19,9 +19,9 @@ php artisan migrate
 ```php
 <?php
 return [
-    'owner'=>null, // 'App\User', Set to set a owner object for image
+    'owner'=>null, // Set to set a owner object f.eks. 'App\User' 
     'folder'=>'uploads/images', // Folder to upload to
-    'routes'=>true, // Should have routes
+    'routes'=>'/', // Route group name. To prevent setting routes set null
 ];
 ```
 

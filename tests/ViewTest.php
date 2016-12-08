@@ -11,7 +11,7 @@ class ViewTest extends TestCase
     /** @test */
     public function default_config_for_routes_are_false() {
         $this->assertTrue( config( 'laravelimage.routes' ) !== null);
-        // $this->assertEquals( true, config( 'laravelimage.routes' ) );
+        $this->assertEquals( '/', config( 'laravelimage.routes' ) );
     }
 
     /** @test */

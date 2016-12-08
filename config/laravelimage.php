@@ -2,5 +2,5 @@
 return [
     'owner'=>null,
     'folder'=>'uploads/images',
-    'routes'=>true,
+    'routes'=>'/',
 ];

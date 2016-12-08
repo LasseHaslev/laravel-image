@@ -30,7 +30,7 @@ class ServiceProvider extends BaseServiceProvider
         ]);
         $this->loadMigrationsFrom( __DIR__.'/../../database/migrations' );
 
-        if (config( 'laravelimage.routes' )) {
+        if ((boolean) config( 'laravelimage.routes' )) {
             $this->loadRoutesFrom( __DIR__.'/../../routes/web.php' );
         }
         $this->loadViewsFrom( __DIR__.'/../../resources/views', 'images' );
