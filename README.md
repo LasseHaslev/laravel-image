@@ -15,6 +15,17 @@ LasseHaslev\LaravelImage\Providers\ServiceProvider::class,
 php artisan migrate
 ```
 
+#### Config
+```php
+<?php
+return [
+    'owner'=>null, // 'App\User', Set to set a owner object for image
+    'folder'=>'uploads/images', // Folder to upload to
+    'routes'=>true, // Should have routes
+];
+```
+
+
 #### Api
 ```php
 // Upload new image

@@ -1,5 +1,6 @@
 <?php
 return [
-    'owner'=>'App\User',
+    'owner'=>null,
     'folder'=>'uploads/images',
+    'routes'=>true,
 ];

@@ -9,6 +9,12 @@ use LasseHaslev\LaravelImage\Image;
 class ViewTest extends TestCase
 {
     /** @test */
+    public function default_config_for_routes_are_false() {
+        $this->assertTrue( config( 'laravelimage.routes' ) !== null);
+        // $this->assertEquals( true, config( 'laravelimage.routes' ) );
+    }
+
+    /** @test */
     public function has_route_for_listing_images() {
         $image = factory( Image::class )->create();
         $this->visitRoute( 'images.index' )
