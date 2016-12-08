@@ -48,8 +48,9 @@ class ImagesController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Image $image)
+    public function update(Request $request, $image)
     {
+        $image = Image::find( $image );
         if ( $request->hasFile( 'image' ) ) {
             $image->uploadImage( $request->file( 'image' ) );
         }
@@ -64,8 +65,9 @@ class ImagesController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( Image $image )
+    public function destroy( $image )
     {
+        $image = Image::find( $image );
         $image->delete();
         return redirect()->back();
     }
@@ -75,8 +77,9 @@ class ImagesController extends BaseController
      *
      * @return void
      */
-    public function download(Image $image)
+    public function download($image)
     {
+        $image = Image::find( $image );
         return $image->download();
     }
 
