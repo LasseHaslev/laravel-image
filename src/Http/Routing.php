@@ -74,7 +74,7 @@ class Routing
                 return $this->getRoute('images.destroy', 'images/{image}', 'destroy', 'delete' );
                 break;
             case 'download':
-                return $this->getRoute('images.download', 'images/{image}', 'download', 'post' );
+                return $this->getRoute('images.download', 'images/{image}/download', 'download', 'post' );
                 break;
             case null:
                 return $this->routes();
@@ -90,26 +90,10 @@ class Routing
      *
      * @return void
      */
-    protected function getRoute($name, $route, $method, $routeMethod = 'get')
+    protected function getRoute($name, $uri, $method, $routeMethod = 'get')
     {
-        switch ($routeMethod) {
-            case 'post':
-                return Route::post( $route, sprintf( '\%s@%s', ImagesController::class, $method ) )->name( $name );
-                break;
-            case 'put':
-                return Route::put( $route, sprintf( '\%s@%s', ImagesController::class, $method ) )->name( $name );
-                break;
-            case 'delete':
-                return Route::delete( $route, sprintf( '\%s@%s', ImagesController::class, $method ) )->name( $name );
-                break;
-            case 'post':
-                return Route::post( $route, sprintf( '\%s@%s', ImagesController::class, $method ) )->name( $name );
-                break;
-
-            default:
-                return Route::get( $route, sprintf( '\%s@%s', ImagesController::class, $method ) )->name( $name );
-                break;
-        }
+        $router = app('router');
+        $router->match( $routeMethod, $uri, sprintf( '\%s@%s', ImagesController::class, $method ) )->name( $name );
     }
 
 }
