@@ -7,7 +7,9 @@
             "email": "lasse@haslev.no"
         }
     ],
-    "require": {},
+    "require": {
+        "lassehaslev/laravel-package-router": "^0.1.0"
+    },
     "require-dev": {
         "orchestra/testbench": "3.3.x",
         "phpunit/phpunit": "^5.6"
