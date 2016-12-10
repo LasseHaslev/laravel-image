@@ -17,8 +17,8 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom( __DIR__.'/../../config/laravelimage.php', 'laravelimage');
         $this->createRoutes();
+        $this->mergeConfigFrom( __DIR__.'/../../config/laravelimage.php', 'laravelimage');
     }
 
     /**
@@ -55,35 +55,30 @@ class ServiceProvider extends BaseServiceProvider
             'method'=>'get',
             'as'=>'images.index',
             'uses'=>'\\' .ImagesController::class . '@index',
-            'middleware'=>null,
         ] );
         $router->add( 'images.store', [
             'uri'=>'images',
             'method'=>'post',
             'as'=>'images.store',
             'uses'=>'\\' .ImagesController::class . '@store',
-            'middleware'=>null,
         ] );
         $router->add( 'images.update', [
             'uri'=>'images/{image}',
             'method'=>'put',
             'as'=>'images.update',
             'uses'=>'\\' .ImagesController::class . '@update',
-            'middleware'=>null,
         ] );
         $router->add( 'images.destroy', [
             'uri'=>'images/{image}',
             'method'=>'delete',
             'as'=>'images.destroy',
             'uses'=>'\\' .ImagesController::class . '@destroy',
-            'middleware'=>null,
         ] );
         $router->add( 'images.download', [
             'uri'=>'images/{image}/download',
             'method'=>'post',
             'as'=>'images.download',
             'uses'=>'\\' .ImagesController::class . '@download',
-            'middleware'=>null,
         ] );
     }
 }
