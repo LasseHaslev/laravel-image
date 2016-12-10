@@ -18,6 +18,7 @@ class ServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->mergeConfigFrom( __DIR__.'/../../config/laravelimage.php', 'laravelimage');
+        $this->createRoutes();
     }
 
     /**
@@ -35,7 +36,6 @@ class ServiceProvider extends BaseServiceProvider
         if ((boolean) config( 'laravelimage.routes' )) {
             $this->loadRoutesFrom( __DIR__.'/../../routes/web.php' );
         }
-        $this->createRoutes();
 
 
         $this->loadViewsFrom( __DIR__.'/../../resources/views', 'images' );
@@ -54,35 +54,35 @@ class ServiceProvider extends BaseServiceProvider
             'uri'=>'images',
             'method'=>'get',
             'as'=>'images.index',
-            'uses'=>ImagesController::class . '@index',
+            'uses'=>'\\' .ImagesController::class . '@index',
             'middleware'=>null,
         ] );
         $router->add( 'images.store', [
             'uri'=>'images',
             'method'=>'post',
             'as'=>'images.store',
-            'uses'=>ImagesController::class . '@store',
+            'uses'=>'\\' .ImagesController::class . '@store',
             'middleware'=>null,
         ] );
         $router->add( 'images.update', [
             'uri'=>'images/{image}',
             'method'=>'put',
             'as'=>'images.update',
-            'uses'=>ImagesController::class . '@update',
+            'uses'=>'\\' .ImagesController::class . '@update',
             'middleware'=>null,
         ] );
         $router->add( 'images.destroy', [
             'uri'=>'images/{image}',
             'method'=>'delete',
             'as'=>'images.destroy',
-            'uses'=>ImagesController::class . '@destroy',
+            'uses'=>'\\' .ImagesController::class . '@destroy',
             'middleware'=>null,
         ] );
         $router->add( 'images.download', [
             'uri'=>'images/{image}/download',
             'method'=>'post',
             'as'=>'images.download',
-            'uses'=>ImagesController::class . '@download',
+            'uses'=>'\\' .ImagesController::class . '@download',
             'middleware'=>null,
         ] );
     }
