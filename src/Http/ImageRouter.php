@@ -53,31 +53,31 @@ class ImageRouter extends PackageRouter
     public function createRoutes()
     {
 
-        $this->add( 'images.index', [
+        $this->add( 'web.images.index', [
             'uri'=>'images',
             'method'=>'get',
             'as'=>'images.index',
             'uses'=>'\\' .ImagesController::class . '@index',
         ] );
-        $this->add( 'images.store', [
+        $this->add( 'web.images.store', [
             'uri'=>'images',
             'method'=>'post',
             'as'=>'images.store',
             'uses'=>'\\' .ImagesController::class . '@store',
         ] );
-        $this->add( 'images.update', [
+        $this->add( 'web.images.update', [
             'uri'=>'images/{image}',
             'method'=>'put',
             'as'=>'images.update',
             'uses'=>'\\' .ImagesController::class . '@update',
         ] );
-        $this->add( 'images.destroy', [
+        $this->add( 'web.images.destroy', [
             'uri'=>'images/{image}',
             'method'=>'delete',
             'as'=>'images.destroy',
             'uses'=>'\\' .ImagesController::class . '@destroy',
         ] );
-        $this->add( 'images.download', [
+        $this->add( 'web.images.download', [
             'uri'=>'images/{image}/download',
             'method'=>'post',
             'as'=>'images.download',
