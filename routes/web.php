@@ -18,3 +18,9 @@ Route::group( [ 'prefix'=>config( 'laravelimage.routes' ) ], function () {
     $router = ImageRouter::get();
     $router->routes();
 });
+
+Route::group( [ 'prefix'=>'api' ], function ()
+{
+    $router = ImageRouter::get();
+    $router->routes( 'api' );
+} );
