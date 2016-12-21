@@ -22,6 +22,7 @@ class ImageTransformer extends BaseTransformer
             "original_name"=>$model->original_name,
             "alt"=>$model->alt,
             "path"=>$model->path,
+            "url"=>$model->url(),
             "extension"=>$model->extension,
             "size"=>$model->size,
             "mime_type"=>$model->mime_type,
