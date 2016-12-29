@@ -23,6 +23,7 @@ class ImageTransformer extends BaseTransformer
             "alt"=>$model->alt,
             "path"=>$model->path,
             "url"=>$model->url(),
+            "download_url"=>route( 'images.download', $model->id ),
             "extension"=>$model->extension,
             "size"=>$model->size,
             "readable_size"=>$model->readableSize(0),

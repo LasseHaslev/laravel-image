@@ -47,6 +47,12 @@ class ImageRouter extends PackageRouter
             'as'=>'api.images.store',
             'uses'=>'\\' .ApiController::class . '@store',
         ] );
+        $this->add( 'api.images.destroy', [
+            'uri'=>'images/{image}',
+            'method'=>'delete',
+            'as'=>'api.images.destroy',
+            'uses'=>'\\' .ApiController::class . '@destroy',
+        ] );
     }
 
 

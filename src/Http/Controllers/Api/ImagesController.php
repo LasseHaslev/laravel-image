@@ -61,8 +61,12 @@ class ImagesController extends BaseController
      */
     public function destroy( Image $image )
     {
-        $image = Image::find( $image );
-        $image->delete();
+        if ( $image->delete() ) {
+            flash( trans( 'crudlang::messages.deleted.success', [ 'item'=>$image->original_name ] ), 'success' );
+        }
+        else {
+            flash( trans( 'crudlang::messages.deleted.error', [ 'item'=>$image->original_name ] ), 'success' );
+        }
         return redirect()->back();
     }
 

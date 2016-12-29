@@ -1,12 +1,13 @@
 import axios from 'axios';
 import Crud from '@lassehaslev/vue-crud';
+import HasActions from '../../../../../resources/assets/js/components/CRUD/mixins/HasActions';
 export default {
-    mixins: [ Crud ],
+    mixins: [ Crud, HasActions ],
 
     template: `
 <div>
     <div class="columns is-multiline">
-        <div v-for="( item, index ) in items" class="column is-3 is-6-tablet is-4-widescreen">
+        <div v-for="( item, index ) in items" class="column is-6-tablet is-4-desktop is-3-widescreen">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">
@@ -40,17 +41,16 @@ export default {
                         <small>{{ item.created_at }}</small>
                     </div>
                 </div>
-            <footer class="card-footer">
-                <a :href="item.download" class="card-footer-item">Download</a>
+            <footer v-if="false" class="card-footer">
+                <a @click.prevent="download( item )" :href="item.download_url" class="card-footer-item">Download</a>
             </footer>
             <footer class="card-footer">
-                <a class="card-footer-item" href="">
-                    Edit
-                </a>
 
-                <a class="card-footer-item" href="">
-                    Delete
-                </a>
+                <delete v-if="deleteUrl" :url="deleteUrl( item )" @delete="onRemove( index )">
+                    <div class="card-footer-item" :href="deleteUrl( item )">
+                        Delete
+                    </div>
+                </delete>
             </footer>
             </div>
         </div>
@@ -63,6 +63,32 @@ export default {
         axios.get( '/api/images' ).then( function( response ) {
             self.append( response.data.data );
         } );
-    }
+    },
+
+    methods: {
+        download( item ) {
+            console.log(item);
+            axios.post( item.download_url, { responseType: 'blob' } ).then( function( response ) {
+                console.log(response);
+                download( response, item.original_name, item.mime_type );
+            } ).catch( function( error ) {
+                
+            } );
+        },
+        onRemove( index ) {
+            this.remove( index );
+            Notifications.notify({
+                'message': 'Item successfully deleted.',
+                'type': 'success',
+            });
+        },
+        onRemoveError( response ) {
+            Notifications.notify({
+                'message': response.statusText + ': ' + response.body,
+                'type': 'danger',
+                'important': true,
+            });
+        },
+    },
 
 }
