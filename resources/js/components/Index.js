@@ -5,7 +5,6 @@ export default {
 
     template: `
 <div>
-    <k-dropzone></k-dropzone>
     <div class="columns is-multiline">
         <div v-for="( item, index ) in items" class="column is-3 is-6-tablet is-4-widescreen">
             <div class="card">
