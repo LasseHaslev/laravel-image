@@ -1,3 +1,5 @@
+<image-list></image-list>
+<?php /* ?>
 <div class="columns is-mobile is-multiline">
 @foreach( $images as $image )
     <div class="column">
@@ -5,3 +7,4 @@
     </div>
 @endforeach
 </div>
+<?php */ ?>
