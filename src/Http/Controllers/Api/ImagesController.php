@@ -1,6 +1,6 @@
 <?php
 
-namespace LasseHaslev\LaravelImage\Http\Controllers;
+namespace LasseHaslev\LaravelImage\Http\Controllers\Api;
 
 use LasseHaslev\LaravelImage\Image;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -10,6 +10,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use LasseHaslev\LaravelImage\Http\Requests\StoreImageRequest;
 use Illuminate\Http\Request;
 
+use LasseHaslev\ApiResponse\Responses\ResponseTrait;
+use LasseHaslev\LaravelImage\Http\Transformers\ImageTransformer;
+
 /**
  * Class ImagesController
  * @author Lasse S. Haslev
@@ -17,6 +20,7 @@ use Illuminate\Http\Request;
 class ImagesController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use ResponseTrait;
     /**
      * Display a listing of the resource.
      *
@@ -25,62 +29,17 @@ class ImagesController extends BaseController
     public function index()
     {
         $images = Image::all();
-        return view( 'images::index' )
-            ->with( 'images', $images );
+        return $this->response->collection( $images, new ImageTransformer );
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show a spesific model
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return response
      */
-    public function store(StoreImageRequest $request)
+    public function show(Image $image)
     {
-        $image = Image::upload( $request->file( 'image' ) );
-        return redirect()->back();
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $image)
-    {
-        $image = Image::find( $image );
-        if ( $request->hasFile( 'image' ) ) {
-            $image->uploadImage( $request->file( 'image' ) );
-        }
-
-        $image->update( $request->all() );
-        return redirect()->back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy( $image )
-    {
-        $image = Image::find( $image );
-        $image->delete();
-        return redirect()->back();
-    }
-
-    /**
-     * undocumented function
-     *
-     * @return void
-     */
-    public function download($image)
-    {
-        $image = Image::find( $image );
-        return $image->download();
+        return $this->response->item( $image, new ImageTransformer );
     }
 
 }

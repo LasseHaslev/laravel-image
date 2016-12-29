@@ -15,6 +15,11 @@
         "orchestra/testbench": "3.3.x",
         "phpunit/phpunit": "^5.6"
     },
+    "extra": {
+        "laravel-modules": {
+            "service-provider": "LasseHaslev\\LaravelImage\\Providers\\ServiceProvider"
+        }
+    },
     "autoload": {
         "psr-4": {
             "LasseHaslev\\LaravelImage\\": "src/"
