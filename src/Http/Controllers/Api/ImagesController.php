@@ -33,6 +33,19 @@ class ImagesController extends BaseController
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreImageRequest $request)
+    {
+        $image = Image::upload( $request->file( 'image' ) );
+        return $this->response->item( $image, new ImageTransformer );
+        return redirect()->back();
+    }
+
+    /**
      * Show a spesific model
      *
      * @return response
