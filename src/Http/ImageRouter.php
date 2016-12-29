@@ -41,6 +41,12 @@ class ImageRouter extends PackageRouter
             'as'=>'api.images.show',
             'uses'=>'\\' .ApiController::class . '@show',
         ] );
+        $this->add( 'api.images.store', [
+            'uri'=>'images',
+            'method'=>'post',
+            'as'=>'api.images.store',
+            'uses'=>'\\' .ApiController::class . '@store',
+        ] );
     }
 
 
