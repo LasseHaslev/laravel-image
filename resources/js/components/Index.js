@@ -47,9 +47,9 @@ export default {
             <footer class="card-footer">
 
                 <delete v-if="deleteUrl" :url="deleteUrl( item )" @delete="onRemove( index )">
-                    <div class="card-footer-item" :href="deleteUrl( item )">
+                    <a @click.prevent class="card-footer-item" :href="deleteUrl( item )">
                         Delete
-                    </div>
+                    </a>
                 </delete>
             </footer>
             </div>

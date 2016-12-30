@@ -67,7 +67,7 @@ class ImagesController extends BaseController
         else {
             flash( trans( 'crudlang::messages.deleted.error', [ 'item'=>$image->original_name ] ), 'success' );
         }
-        return redirect()->back();
+        return $this->response->noContent();
     }
 
 }
