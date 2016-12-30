@@ -6,6 +6,7 @@ export default {
 
     template: `
 <div>
+    <k-dropzone @upload="onUpload"></k-dropzone>
     <div class="columns is-multiline">
         <div v-for="( item, index ) in items" class="column is-6-tablet is-4-desktop is-3-widescreen">
             <div class="card">
@@ -66,6 +67,11 @@ export default {
     },
 
     methods: {
+        onUpload( response ) {
+            this.prepend( response.data.data );
+            console.log('Upload');
+            console.log(response);
+        },
         download( item ) {
             console.log(item);
             axios.post( item.download_url, { responseType: 'blob' } ).then( function( response ) {
