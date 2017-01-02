@@ -16,9 +16,11 @@ export default {
                         }">
                 </div>
                 <image-picker :url="url"
-                :items-adaptor="imagesAdaptor"
+                :adaptor="imagesAdaptor"
                 @confirm="selectItem"
-                ref="imagePicker"></image-picker>
+                ref="imagePicker">
+        <k-dropzone @upload="onUpload"></k-dropzone>
+        </image-picker>
             </div>
     `,
 
@@ -31,6 +33,10 @@ export default {
         imagesAdaptor( images ) {
             // return images;
             return images.data;
+        },
+
+        onUpload( response ) {
+            this.$refs.imagePicker.add( response.data );
         },
     },
 

@@ -1,8 +1,8 @@
 import { Dropzone } from '@lassehaslev/vue-dropzone';
 export default {
     template: `
-        <dropzone @upload="onUpload" @state-change="onStateChanged" url="/api/images" name="image">
-            <div class="hero is-pink" :class="{ 'is-gradient': state }" style="cursor:pointer">
+        <dropzone url="/api/images" name="image" @upload="onUpload" @state-change="onStateChanged">
+            <div class="hero is-pink" :class="{ 'is-gradient': dragOver }" style="cursor:pointer">
                 <div class="hero-body has-text-centered"><span class="icon"><i class="fa fa-cloud-upload"></i></span> Drop files here to upload</div>
             </div>
         </dropzone>
@@ -10,7 +10,7 @@ export default {
 
     data() {
         return {
-            state: false,
+            dragOver: false,
         }
     },
 
