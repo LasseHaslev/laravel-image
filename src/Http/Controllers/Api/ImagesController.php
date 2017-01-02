@@ -42,7 +42,6 @@ class ImagesController extends BaseController
     {
         $image = Image::upload( $request->file( 'image' ) );
         return $this->response->item( $image, new ImageTransformer );
-        return redirect()->back();
     }
 
     /**

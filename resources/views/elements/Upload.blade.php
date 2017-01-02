@@ -1,1 +1,1 @@
-<k-dropzone></k-dropzone>
+{{--<k-dropzone></k-dropzone>--}}
