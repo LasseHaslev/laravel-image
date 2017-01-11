@@ -7,7 +7,7 @@ export default {
     <div>
         <div v-if="multiple" class="columns is-mobile is-multiline">
             <div v-for="( value, index ) in itemValues" class="column is-2">
-                <image-input-item @select="selectValue" :index="index" :value="value"></image-input-item>
+                <image-input-item :url="url" @select="selectValue" :index="index" :value="value"></image-input-item>
 
                 <div @click="remove( index )" class="button is-danger is-fullwidth">Remove</div>
             </div>
