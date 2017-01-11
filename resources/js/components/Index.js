@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Crud from '@lassehaslev/vue-crud';
-import HasActions from '../../../../../resources/assets/js/components/CRUD/mixins/HasActions';
+import HasActions from '../../../../../../resources/assets/js/components/CRUD/mixins/HasActions';
 export default {
     mixins: [ Crud, HasActions ],
 
