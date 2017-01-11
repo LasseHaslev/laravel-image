@@ -19,12 +19,19 @@ export default {
                 :adaptor="imagesAdaptor"
                 @confirm="selectItem"
                 ref="imagePicker">
-        <k-dropzone @upload="onUpload"></k-dropzone>
+        <k-dropzone :url="url" @upload="onUpload"></k-dropzone>
         </image-picker>
             </div>
     `,
 
     mixins: [ BaseInputItem ],
+
+    props: {
+        url: {
+            required: true,
+            type: String,
+        }
+    },
 
     methods: {
         open() {
@@ -39,14 +46,6 @@ export default {
             this.$refs.imagePicker.add( response.data );
         },
     },
-
-    props: {
-        url: {
-            required: true,
-            type: String,
-        }
-    },
-
 
     components: {
         ImagePicker,
