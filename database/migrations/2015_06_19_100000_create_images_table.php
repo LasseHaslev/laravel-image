@@ -33,6 +33,10 @@ class CreateImagesTable extends Migration {
             ->default( null )
             ->index();
 
+        $table->string( 'owner_type' )
+            ->nullable()
+            ->default( null );
+
         $table->timestamps();
       });
 
