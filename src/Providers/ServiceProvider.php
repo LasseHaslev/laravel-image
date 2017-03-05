@@ -3,6 +3,7 @@
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use LasseHaslev\LaravelImage\Http\ImageRouter;
 use LasseHaslev\LaravelImage\Http\Controllers\ImagesController;
+use Illuminate\Support\Facades\App;
 
 /**
  * Class ServiceProvider
@@ -18,6 +19,7 @@ class ServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->mergeConfigFrom( __DIR__.'/../../config/laravelimage.php', 'laravelimage');
+        App::register( \LasseHaslev\Image\Providers\LaravelServiceProvider::class );
     }
 
     /**
