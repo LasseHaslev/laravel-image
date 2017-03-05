@@ -28,7 +28,7 @@ class ImagesController extends BaseController
      */
     public function index()
     {
-        $images = Image::all();
+        $images = Image::orderBy( 'updated_at', 'DESC' )->get();
         return $this->response->collection( $images, new ImageTransformer );
     }
 

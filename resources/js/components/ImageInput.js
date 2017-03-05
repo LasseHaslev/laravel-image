@@ -1,39 +1,92 @@
-import { BaseInput } from '@lassehaslev/vue-item-input';
-import { InputElement } from '@lassehaslev/vue-item-input';
-import ImageInputItem from './ImageInputItem';
-
+import { Dropzone } from '@lassehaslev/vue-dropzone';
+import ImagePicker from '@lassehaslev/vue-image-picker';
+console.log(ImagePicker);
 export default {
-    template:`
+    template: `
     <div>
-        <div v-if="multiple" class="columns is-mobile is-multiline">
-            <div v-for="( value, index ) in itemValues" class="column is-2">
-                <image-input-item :url="url" @select="selectValue" :index="index" :value="value"></image-input-item>
+        <div style="padding-bottom: 100%"
+            @click="open"
+            :style="{
+                'background-image': selectedImage ? 'url(' + selectedImage.url + ')' : '',
+                'background-size':'contain',
+                'background-position':'center',
+                'background-repeat': 'no-repeat',
+                'background-color': '#ccc',
+                'cursor':'pointer',
+            }"></div>
 
-                <div @click="remove( index )" class="button is-danger is-fullwidth">Remove</div>
-            </div>
-            <div class="column is-2" style="cursor:pointer;">
-                <div style="background-color:blue; padding-bottom: 100%" @click="addEmptyValue"></div>
-            </div>
+            <input type="hidden" :name="name" :value="selectedImage ? selectedImage.id : ''">
+
+        <div class="has-text-centered">
+            <a @click.prevent="selectImage(null)" class="button is-fullwidth is-warning" href="#">Remove image</a>
         </div>
-        <div v-else v-for="( value, index ) in itemValues">
-            <image-input-item :url="url" @select="selectValue" :index="index" :value="value"></image-input-item>
-            <div @click="zeroOut( index )" class="button is-warning is-fullwidth">Empty value</div>
-        </div>
-        <input-element :name="name" :values="ids"></input-element>
+        <image-picker :url="url"
+        :adaptor="imagesAdaptor"
+        :selected="selectedImage"
+        @confirm="selectImage"
+        ref="imagePicker">
+            <dropzone :url="uploadUrl ? uploadUrl : url" @upload="onUpload" @state-change="onStateChanged" name="image">
+                <div class="hero" :class="[ isHover ? 'is-warning' : 'is-info' ]">
+                    <div class="hero-body has-text-centered"><span class="icon"><i class="fa fa-cloud-upload"></i></span> Drop files here to upload</div>
+                </div>
+            </dropzone>
+        </image-picker>
     </div>
     `,
 
-    mixins: [ BaseInput ],
-
     props: {
         url: {
-            required: true,
             type: String,
+            default: '',
+        },
+        name: {
+            type: String,
+            default: 'image',
+        },
+        values: {
+            default: null,
+        },
+        'upload-url': {
+            type: 'string',
+            default: null,
         }
     },
 
+    mounted() {
+        this.selectedImage = this.values;
+    },
+
+    data() {
+        return{
+
+            selectedImage: null,
+
+            isHover: false,
+
+        }
+    },
+
+    methods: {
+        open() {
+            this.$refs.imagePicker.open();
+        },
+        imagesAdaptor( images ) {
+            return images.data;
+        },
+        selectImage( image ) {
+            this.selectedImage = image;
+        },
+
+        onStateChanged( state ) {
+            this.isHover = state;
+        },
+        onUpload( response ) {
+            this.$refs.imagePicker.uploaded( response.data );
+        },
+    },
+
     components: {
-        ImageInputItem,
-        InputElement,
+        ImagePicker,
+        Dropzone,
     }
 }
