@@ -10,7 +10,7 @@
     "require": {
         "lassehaslev/laravel-package-router": "^0.1.0",
         "lassehaslev/api-response": "^0.1.3",
-        "lassehaslev/image": "^0.1.0"
+        "lassehaslev/image": "^0.2.0"
     },
     "require-dev": {
         "orchestra/testbench": "3.3.x",
