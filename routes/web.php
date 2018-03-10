@@ -1,6 +1,5 @@
 <?php
 
-use LasseHaslev\LaravelImage\Http\Controllers\ImagesController;
 use LasseHaslev\LaravelImage\Http\ImageRouter;
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +14,10 @@ use LasseHaslev\LaravelImage\Http\ImageRouter;
 
 // use LasseHaslev\LaravelImage\Http\Controllers\ImagesController;
 Route::group( [ 'prefix'=>config( 'laravelimage.routes' ) ], function () {
-    $router = ImageRouter::get();
-    $router->routes();
+    ImageRouter::web();
 });
 
 Route::group( [ 'prefix'=>'api' ], function ()
 {
-    $router = ImageRouter::get();
-    $router->routes( 'api' );
+    ImageRouter::api();
 } );
